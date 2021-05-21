@@ -68,13 +68,15 @@ object CameraUtil {
                     null
                 }
 
-                val packageName = javaClass.`package`.name
-
-                // Continue only if the File was successfully created
+                val authorities = "com.example.androidstoragetest.fileprovider"
                 photoFile?.also {
+                    /*
+                     * - 파일에 대한 콘텐츠 URI 생성
+                     * : 콘텐츠 URI를 사용하여 다른 앱과 파일을 공유하려면 앱에서 콘텐츠 URI를 생성합니다. 컨텐츠 URI를 생성하려면, 새로운 생성 File한 후 전달 파일에 대한 getUriForFile로 반환된 URI로 콘텐츠를 보낼 수 있습니다.
+                     */
                     val photoURI: Uri = FileProvider.getUriForFile(
                         targetActivity,
-                        packageName,
+                        authorities,
                         it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
@@ -83,4 +85,18 @@ object CameraUtil {
             }
         }
     }
+
+
+    /**
+     * 갤러리에 사진 추가
+     */
+    private fun galleryAddPic(targetActivity: Activity) {
+        Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
+            val f = File(currentPhotoPath)
+            mediaScanIntent.data = Uri.fromFile(f)
+            targetActivity.sendBroadcast(mediaScanIntent)
+        }
+    }
+
+
 }
