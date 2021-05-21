@@ -9,22 +9,24 @@
     ex) getExternalFileDir이 Environment.DIRECTORY_PICTURES를 인수로 하여 호출될 때 반환되는 경로와 일치합니다.
 -->
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <root-path name="my_images" path="/storage/emulated/0/Pictures"/>
+
     <!-- Context.getFilesDir() -->
-    <files-path name="name" path="path" />
+    <files-path name="name" path="." />
 
     <!-- getCacheDir() -->
-    <cache-path name="name" path="path" />
+    <cache-path name="name" path="." />
 
     <!-- Environment.getExternalStorageDirectory() -->
-    <external-path name="name" path="path" />
+    <external-path name="name" path="." />
 
     <!-- Context.getExternalFilesDir(String) Context.getExternalFilesDir(null) -->
-    <external-files-path name="my_images" path="Android/data/com.example.androidstoragetest/files/Pictures" />
+    <external-files-path name="my_images" path="." />
 
     <!-- Context.getExternalCacheDir() -->
-    <external-cache-path name="name" path="path" />
+    <external-cache-path name="name" path="." />
 
     <!-- Context.getExternalMediaDirs() -->
-    <external-media-path name="name" path="path" />
+    <external-media-path name="name" path="." />
 </paths>
     
