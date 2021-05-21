@@ -217,4 +217,18 @@ object CameraUtil {
             } while (cur.moveToNext())
         }
     }
+
+
+    const val REQUEST_VIDEO_CAPTURE = 3
+
+    /**
+     * 비디오 녹화하기
+     */
+    private fun dispatchTakeVideoIntent(targetActivity: Activity) {
+        Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takeVideoIntent ->
+            takeVideoIntent.resolveActivity(targetActivity.packageManager)?.also {
+                targetActivity.startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE)
+            }
+        }
+    }
 }

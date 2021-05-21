@@ -2,6 +2,7 @@ package com.example.androidstoragetest
 
 import android.app.Activity
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
@@ -55,6 +56,10 @@ class MainActivity : AppCompatActivity() {
                 viewPicture(data)
 
                 saveFile(this)
+            }
+            
+            CameraUtil.REQUEST_VIDEO_CAPTURE ->{
+                Log.d(TAG,"onActivityResult REQUEST_VIDEO_CAPTURE = ${data?.extras?.get("data")}")
             }
         }
     }
