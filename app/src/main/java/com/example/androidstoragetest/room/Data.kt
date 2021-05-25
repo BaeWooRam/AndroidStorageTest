@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Data(
-    @PrimaryKey val uuid: Int,
-    @ColumnInfo(name = "first_name") val title: String,
-    @ColumnInfo(name = "last_name") val contents: String?
+    @PrimaryKey(autoGenerate = true) val uuid: Int,
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "content") val content: String,
+    @ColumnInfo(name = "blob") val blob: ByteArray
 )

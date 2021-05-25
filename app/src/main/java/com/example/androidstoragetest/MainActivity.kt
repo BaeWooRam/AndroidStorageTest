@@ -9,6 +9,7 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import com.example.androidstoragetest.room.AppDatabase
 import com.example.androidstoragetest.util.CameraUtil
 import com.example.androidstoragetest.util.CameraUtil.currentPhotoPath
 import com.example.androidstoragetest.util.CameraUtil.saveFile
+import com.example.androidstoragetest.util.FileUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
 
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         btnSaveGallery.setOnClickListener {
             CameraUtil.dispatchTakePhotoIntent(this)
         }
+
+        tvInfo.text = "External Size = ${FileUtil.getExternalUsageRate(this, Environment.DIRECTORY_PICTURES)}, Internal Size = ${FileUtil.getInternalUsageRate()}"
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
