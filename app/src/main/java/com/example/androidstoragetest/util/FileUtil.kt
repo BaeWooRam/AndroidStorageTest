@@ -2,8 +2,7 @@ package com.example.androidstoragetest.util
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.content.res.AssetManager
 import android.os.Build
 import android.os.Environment
 import android.os.StatFs
@@ -12,8 +11,9 @@ import android.os.storage.StorageManager.ACTION_MANAGE_STORAGE
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.DecimalFormat
 import java.util.*
 
@@ -171,4 +171,40 @@ object FileUtil {
         }
     }
 
+
+    fun saveAssertDB(context: Context, path:String, dbFile:String){
+        val folder = File(path)
+
+        if(!folder.exists()) {
+            folder.mkdirs()
+        }
+
+        val assetManager = context.resources.assets
+
+        // db파일 이름 적어주기
+        val pathName = "${path}${dbFile}"
+        Log.d(TAG, "pathName = $pathName")
+        val outFile = File(pathName)
+
+        try {
+            val inputStream = assetManager.open(dbFile, AssetManager.ACCESS_BUFFER)
+
+            if (outFile.length() <= 0) {
+                Log.d(TAG, "inputStream available = ${inputStream.available()}")
+                val tempData = ByteArray(inputStream.available())
+                inputStream.read(tempData)
+                inputStream.close()
+                outFile.createNewFile()
+
+                val outputStream = FileOutputStream(outFile)
+                outputStream.write(tempData)
+                outputStream.close()
+            } else {
+                Log.d(TAG, "outFile not exist!")
+            }
+        } catch (e: IOException) {
+            Log.d(TAG, "outFile IOException!")
+            e.printStackTrace()
+        }
+    }
 }

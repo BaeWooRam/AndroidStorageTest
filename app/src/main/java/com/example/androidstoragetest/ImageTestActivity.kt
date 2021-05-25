@@ -1,21 +1,16 @@
 package com.example.androidstoragetest
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidstoragetest.room.AppDatabase
 import com.example.androidstoragetest.room.Data
-import com.example.androidstoragetest.util.CameraUtil
 import com.example.androidstoragetest.util.FileUtil
 import com.example.androidstoragetest.util.ImageUtil
 import kotlinx.android.synthetic.main.activity_image_test.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.ivPicture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +18,6 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
-import kotlin.random.Random
-import kotlin.random.nextInt
 
 
 /**
@@ -54,6 +47,8 @@ class ImageTestActivity : AppCompatActivity() {
                 }
             }
         }
+
+        FileUtil.saveAssertDB(this,"/data/data/com.example.androidstoragetest/databases/","haeroad.db")
     }
 
     inner class DownloadFilesTask() : AsyncTask<String?, Void?, Bitmap?>() {
