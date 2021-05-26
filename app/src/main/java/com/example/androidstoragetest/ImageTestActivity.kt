@@ -6,6 +6,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.androidstoragetest.db.HearoadDBHelper
 import com.example.androidstoragetest.room.AppDatabase
 import com.example.androidstoragetest.room.Data
 import com.example.androidstoragetest.util.FileUtil
@@ -47,8 +48,6 @@ class ImageTestActivity : AppCompatActivity() {
                 }
             }
         }
-
-        FileUtil.saveAssertDB(this,"/data/data/com.example.androidstoragetest/databases/","haeroad.db")
     }
 
     inner class DownloadFilesTask() : AsyncTask<String?, Void?, Bitmap?>() {

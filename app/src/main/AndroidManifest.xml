@@ -22,8 +22,15 @@
             </intent-filter>
         </activity>
 
-
         <activity android:name=".ImageTestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ExternalDBTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

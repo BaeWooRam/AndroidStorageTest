@@ -89,8 +89,7 @@ object FileUtil {
     fun checkStorageAvailableByte(context: Context, filesDir: File) {
         val storageManager = context.getSystemService<StorageManager>()!!
         val appSpecificInternalDirUuid: UUID = storageManager.getUuidForPath(filesDir)
-        val availableBytes: Long =
-            storageManager.getAllocatableBytes(appSpecificInternalDirUuid)
+        val availableBytes: Long = storageManager.getAllocatableBytes(appSpecificInternalDirUuid)
         if (availableBytes >= NUM_BYTES_NEEDED_FOR_MY_APP) {
             storageManager.allocateBytes(
                 appSpecificInternalDirUuid, NUM_BYTES_NEEDED_FOR_MY_APP
@@ -107,6 +106,9 @@ object FileUtil {
         return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
     }
 
+    /**
+     *
+     */
     fun getExternalUsageRate(): String {
         return if (externalMemoryAvailable()) {
             val path = Environment.getExternalStorageDirectory()
@@ -116,10 +118,7 @@ object FileUtil {
             val totalBlocks = state.blockCountLong
             val availableBlocks = state.availableBlocksLong
 
-            Log.d(
-                TAG,
-                "getExternalUsageRate() blockSize = $blockSize, totalSize = $totalBlocks, availableSize = $availableBlocks"
-            )
+            Log.d(TAG, "getExternalUsageRate() blockSize = $blockSize, totalSize = $totalBlocks, availableSize = $availableBlocks")
             val storage = 100.0 * (totalBlocks - availableBlocks) / totalBlocks
             df.format(storage) + "%"
         } else {
@@ -127,6 +126,9 @@ object FileUtil {
         }
     }
 
+    /**
+     *
+     */
     fun getExternalUsageRate(context: Context, environmentType: String): String {
         return if (externalMemoryAvailable()) {
             val path = context.getExternalFilesDir(environmentType)
@@ -151,6 +153,9 @@ object FileUtil {
         }
     }
 
+    /**
+     *
+     */
     fun getTotalExternalMemorySize(): String {
         return if (externalMemoryAvailable()) {
             val path = Environment.getExternalStorageDirectory()
@@ -171,7 +176,9 @@ object FileUtil {
         }
     }
 
-
+    /**
+     *
+     */
     fun saveAssertDB(context: Context, path:String, dbFile:String){
         val folder = File(path)
 
